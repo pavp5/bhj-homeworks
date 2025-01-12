@@ -3,15 +3,9 @@ const taskList = document.getElementById('tasks__list');
 const taskPattern = document.querySelector('.task').cloneNode(true);
 document.querySelector('.task').remove();
 
-const taskInput = document.getElementById('task__input');
-taskInput.addEventListener('keyup', (e) => {if (e.key === 'Enter') taskAdd()});
-
 document.getElementById('tasks__add').addEventListener('click', e => {
     e.preventDefault();
-    taskAdd();
-});
-
-function taskAdd() {    
+    const taskInput = document.getElementById('task__input');
     const taskTitle = taskInput.value.trim();
     if (taskTitle) {
         const task = taskPattern.cloneNode(true);       
@@ -23,4 +17,4 @@ function taskAdd() {
         taskList.appendChild(task);
         taskInput.value = '';
     }
-}
+});

@@ -12,20 +12,25 @@ function addProduct(e) {
     const product = e.target.parentNode.parentNode.parentNode;
     const productId = product.dataset.id;
     const productSrc = product.getElementsByTagName('img')[0].getAttribute('src');
-    const productCount = product.querySelector('.product__quantity-value').innerText;
+    let productCount = product.querySelector('.product__quantity-value').innerText;
 
     //Поиск продукта в корзине
-    let cartProduct = Array.from(cartProducts.querySelectorAll('.cart__product')).find(el => {
-        if (el.dataset.id === productId) return el;
-    });
+    let cartProduct = Array.from(cartProducts.querySelectorAll('.cart__product')).find(el => el.dataset.id === productId);
     if (!cartProduct) {
         cartProduct = productPattern.cloneNode(true);
         cartProduct.dataset.id = productId;
-        cartProduct.getElementsByTagName('img')[0].setAttribute('src', productSrc)
+        cartProduct.getElementsByTagName('img')[0].setAttribute('src', productSrc)        
         cartProducts.appendChild(cartProduct);
-    }
+    } else {
+        const cartProductCount = cartProduct.querySelector('.cart__product-count').innerText;        
+        if (productCount === cartProductCount) {            
+            productCount = ++productCount;
+            product.querySelector('.product__quantity-value').innerText = productCount;            
+        }
 
+    }
     cartProduct.querySelector('.cart__product-count').innerText = productCount;
+    
 }
 
 // Увеличение количества продукта

@@ -6,16 +6,15 @@ Array.from(document.querySelectorAll('.has-tooltip')).forEach(el => { el.addEven
 
 function clickLink(e) {
     e.preventDefault();
-    tooltip.classList.remove('tooltip_active');
     const title = e.target.getAttribute('title');
-    if (title !== tooltip.innerText) {
+    if (title !== tooltip.innerText || !tooltip.classList.contains('tooltip_active')) {
         tooltip.innerText = title;
-        const { left, bottom } = e.target.getBoundingClientRect();
-        tooltip.classList.add('tooltip_active');
+        const { left, bottom } = e.target.getBoundingClientRect();        
         tooltip.style.left = left + 'px';
         tooltip.style.top = bottom + 'px';
-
-        // alert(left);
+        tooltip.classList.add('tooltip_active');
+    } else {
+        tooltip.classList.remove('tooltip_active');
     }
 
 
