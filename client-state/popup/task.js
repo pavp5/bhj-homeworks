@@ -6,11 +6,11 @@ function getCookie(name) {
     return false;
 }
 
-if (!getCookie('modal')) {
+if (!getCookie('modalClose')) {
     const modal = document.querySelector('#subscribe-modal');
     modal.classList.add('modal_active');
     document.querySelector('.modal__close').addEventListener('click', () => {
         modal.classList.remove('modal_active');
-        document.cookie = 'modal=close';
+        document.cookie = 'modalClose=true';
     })
 }
